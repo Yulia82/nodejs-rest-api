@@ -18,4 +18,9 @@ const create = async (reqBody) => {
 const updateToken = async (id, token) => {
   return await User.findByIdAndUpdate(id, {token})
 }
-module.exports = { findById, findByEmail, create, updateToken }
+
+const updateAvatar = async (id, avatarUrl) => {
+  return await User.findByIdAndUpdate(id, {avatarUrl}, {new: true})
+}
+
+module.exports = { findById, findByEmail, create, updateToken, updateAvatar }
