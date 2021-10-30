@@ -2,7 +2,7 @@ const Contact = require('../model/contact')
 
 
 const getContactById = async (contactId, userId) => {
-  const result = await Contact.findOne({contactId, owner: userId}).populate({
+  const result = await Contact.findOne({_id: contactId, owner: userId}).populate({
     path: 'owner',
     select: 'email subscription createdAt updatedAt',
   })

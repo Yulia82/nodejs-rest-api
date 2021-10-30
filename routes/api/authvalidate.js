@@ -10,6 +10,12 @@ const joiSchemaAuth = Joi.object(
   }
 )
 
+const joiSchemaEmail = Joi.object(
+  {
+    email: Joi.string().pattern(new RegExp(patternEmail)).required(),
+  }
+)
+
 const validate = async (schema, obj, res, next) => {
   try {
     await schema.validateAsync(obj)
@@ -25,4 +31,8 @@ const validate = async (schema, obj, res, next) => {
 
 module.exports.validateAuth = async (req, res, next) => {
     return await validate(joiSchemaAuth, req.body, res, next)
+}
+
+module.exports.validateEmail = async (req, res, next) => {
+    return await validate(joiSchemaEmail, req.body, res, next)
 }
