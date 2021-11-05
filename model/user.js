@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose')
 const bcrypt = require("bcryptjs")
 const jwt = require('jsonwebtoken')
 const gravatar = require('gravatar')
+const crypto = require('crypto')
 
 require('dotenv').config()
 const SECRET_KEY = process.env.JWT_SECRET_KEY
@@ -35,6 +36,15 @@ const userSchema = new Schema(
             default: function () {
                 return gravatar.url(this.email, { s: '250' }, true)
             },
+        },
+        verify: {
+            type: Boolean,
+            default: false,
+        },
+        verifyToken: {
+            type: String,
+            required: [true, 'Verify token is required'],
+            default: crypto.randomUUID(),
         },
     },
     {
